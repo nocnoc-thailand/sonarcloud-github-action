@@ -1,4 +1,5 @@
-FROM sonarsource/sonar-scanner-cli:5.0
+ARG INPUT_BASEIMAGE=sonarsource/sonar-scanner-cli:5.0
+FROM ${INPUT_BASEIMAGE}
 
 LABEL version="0.0.1" \
       repository="https://github.com/sonarsource/sonarcloud-github-action" \
