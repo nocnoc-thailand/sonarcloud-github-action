@@ -1,34 +1,15 @@
-name: SonarCloud Org Repo Scan
+name: SonarCloud Scan
 description: >
   Scan your code with SonarCloud to detect bugs, vulnerabilities and code smells
   in 26+ programming languages.
 branding:
   icon: check
   color: green
-
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read # This is required for actions/checkout
-
-jobs:
-  SonarCloud:
-    name: "SonarCloud"
-    steps:
-      - name: AWS Configure
-        uses: aws-actions/configure-aws-credentials@v1.7.0
-        with:
-          role-session-name: "nocnoc-github-session"
-          role-to-assume: "arn:aws:iam::885420015722:role/pipeline-sonar-cloud-role"
-          aws-region: "ap-southeast-1"
-          role-duration-seconds: 1200
-
-      - name: Docker action
-        runs:
-          using: docker
-          image: Dockerfile
-          entrypoint: "/entrypoint.sh"
-          post-entrypoint: "/cleanup.sh"
-
+runs:
+  using: docker
+  image: Dockerfile
+  entrypoint: "/entrypoint.sh"
+  post-entrypoint: "/cleanup.sh"
 inputs:
   args:
     description: Additional arguments to the sonarcloud scanner
