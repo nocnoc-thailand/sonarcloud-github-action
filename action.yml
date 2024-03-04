@@ -6,21 +6,19 @@ branding:
   icon: check
   color: green
 
-on:
-  workflow_call:
-    inputs:
-      devops_role_session_name:
-        type: string
-        required: false
-        default: nocnoc-github-session
-      devops_role_assume:
-        type: string
-        required: false
-        default: test-role
-      devops_artifact_region:
-        type: string
-        required: false
-        default: ap-southeast-1
+inputs:
+  devops_role_session_name:
+    type: string
+    required: false
+    default: nocnoc-github-session
+  devops_role_assume:
+    type: string
+    required: false
+    default: test-role
+  devops_artifact_region:
+    type: string
+    required: false
+    default: ap-southeast-1
 
 permissions:
   id-token: write # This is required for requesting the JWT
