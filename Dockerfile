@@ -1,4 +1,5 @@
-FROM public.ecr.aws/i1m9s0y0/sonar-cloud-org-repo-scan:5.0
+ARG BASE_IMAGE=sonarsource/sonar-scanner-cli:5.0
+FROM $BASE_IMAGE
 
 LABEL version="0.0.1" \
       repository="https://github.com/sonarsource/sonarcloud-github-action" \
