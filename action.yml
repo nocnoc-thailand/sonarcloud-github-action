@@ -14,9 +14,9 @@ steps:
   - name: AWS Configure
     uses: aws-actions/configure-aws-credentials@v1.7.0
     with:
-      role-session-name: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
-      role-to-assume: ${{ vars.DEVOPS_ROLE_ASSUME }}
-      aws-region: ${{ vars.DEVOPS_ARTIFACT_REGION }}
+      role-session-name: ${{ env.DEVOPS_ROLE_SESSION_NAME }}
+      role-to-assume: ${{ env.DEVOPS_ROLE_ASSUME }}
+      aws-region: ${{ env.DEVOPS_ARTIFACT_REGION }}
       role-duration-seconds: 1200
 
   - name: Install AWS CLI
