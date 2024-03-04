@@ -5,63 +5,16 @@ description: >
 branding:
   icon: check
   color: green
-
+runs:
+  using: docker
+  image: Dockerfile
+  entrypoint: "/entrypoint.sh"
+  post-entrypoint: "/cleanup.sh"
 inputs:
-  devops_role_session_name:
-    type: string
+  args:
+    description: Additional arguments to the sonarcloud scanner
     required: false
-    default: nocnoc-github-session
-  devops_role_assume:
-    type: string
+  projectBaseDir:
+    description: Set the sonar.projectBaseDir analysis property
     required: false
-    default: test-role
-  devops_artifact_region:
-    type: string
-    required: false
-    default: ap-southeast-1
-
-permissions:
-  id-token: write # This is required for requesting the JWT
-  contents: read # This is required for actions/checkout
-
-jobs:
-  DockerAction:
-    name: "Docker Action"
-    runs-on: self-hosted
-    steps:
-      - name: Print input
-        run: echo ${{ inputs }}
-
-
-# runs-on: self-hosted
-# steps:
-#   - name: Print input
-#     run: echo ${{ inputs.devops_role_session_name }}
-  # - name: AWS Configure
-  #   uses: aws-actions/configure-aws-credentials@v1.7.0
-  #   with:
-  #     role-session-name: ${{ inputs.devops_role_session_name }}
-  #     role-to-assume: ${{ inputs.devops_role_assume }}
-  #     aws-region: ${{ inputs.devops_artifact_region }}
-  #     role-duration-seconds: 1200
-
-  # - name: Install AWS CLI
-  #   uses: nocnoc-thailand/install-aws-cli-action@v1.0.1
-  #   with:
-  #     arch: amd64
-
-  # - name: Docker action
-  #   runs:
-  #     using: docker
-  #     image: Dockerfile
-  #     entrypoint: "/entrypoint.sh"
-  #     post-entrypoint: "/cleanup.sh"
-
-# inputs:
-#   args:
-#     description: Additional arguments to the sonarcloud scanner
-#     required: false
-#   projectBaseDir:
-#     description: Set the sonar.projectBaseDir analysis property
-#     required: false
-#     default: .
+    default: .
