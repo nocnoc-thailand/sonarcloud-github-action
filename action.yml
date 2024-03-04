@@ -24,7 +24,8 @@ on:
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read # This is required for actions/checkout
-  
+
+runs-on: self-hosted
 steps:
   - name: Print input
     run: echo ${{ inputs.devops_role_session_name }}
