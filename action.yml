@@ -31,7 +31,7 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: Print input
-        run: echo ${{ inputs.devops_role_session_name }}
+        run: echo ${{ inputs }}
 
 
 # runs-on: self-hosted
