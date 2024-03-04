@@ -5,11 +5,27 @@ description: >
 branding:
   icon: check
   color: green
-runs:
-  using: docker
-  image: Dockerfile
-  entrypoint: "/entrypoint.sh"
-  post-entrypoint: "/cleanup.sh"
+steps:
+  - name: AWS Configure
+    uses: aws-actions/configure-aws-credentials@v1.7.0
+    with:
+      role-session-name: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
+      role-to-assume: ${{ vars.DEVOPS_ROLE_ASSUME }}
+      aws-region: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
+      role-duration-seconds: 1200
+
+  - name: Install AWS CLI
+    uses: nocnoc-thailand/install-aws-cli-action@v1.0.1
+    with:
+      arch: amd64
+
+  - name: Docker action
+    runs:
+      using: docker
+      image: Dockerfile
+      entrypoint: "/entrypoint.sh"
+      post-entrypoint: "/cleanup.sh"
+
 inputs:
   args:
     description: Additional arguments to the sonarcloud scanner
