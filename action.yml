@@ -15,7 +15,8 @@ on:
         default: nocnoc-github-session
       devops_role_assume:
         type: string
-        required: true
+        required: false
+        default: test-role
       devops_artifact_region:
         type: string
         required: false
