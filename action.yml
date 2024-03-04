@@ -5,6 +5,11 @@ description: >
 branding:
   icon: check
   color: green
+  
+permissions:
+  id-token: write # This is required for requesting the JWT
+  contents: read # This is required for actions/checkout
+  
 steps:
   - name: AWS Configure
     uses: aws-actions/configure-aws-credentials@v1.7.0
