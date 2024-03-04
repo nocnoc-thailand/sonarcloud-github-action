@@ -5,7 +5,22 @@ description: >
 branding:
   icon: check
   color: green
-  
+
+on:
+  workflow_call:
+    inputs:
+      devops_role_session_name:
+        type: string
+        required: false
+        default: nocnoc-github-session
+      devops_role_assume:
+        type: string
+        required: true
+      devops_artifact_region:
+        type: string
+        required: false
+        default: ap-southeast-1
+
 permissions:
   id-token: write # This is required for requesting the JWT
   contents: read # This is required for actions/checkout
@@ -14,9 +29,9 @@ steps:
   - name: AWS Configure
     uses: aws-actions/configure-aws-credentials@v1.7.0
     with:
-      role-session-name: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
-      role-to-assume: ${{ vars.DEVOPS_ROLE_ASSUME }}
-      aws-region: ${{ vars.DEVOPS_ARTIFACT_REGION }}
+      role-session-name: ${{ inputs.devops_role_session_name }}
+      role-to-assume: ${{ inputs.devops_role_assume }}
+      aws-region: ${{ inputs.devops_artifact_region }}
       role-duration-seconds: 1200
 
   - name: Install AWS CLI
