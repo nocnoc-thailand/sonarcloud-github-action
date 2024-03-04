@@ -16,7 +16,7 @@ steps:
     with:
       role-session-name: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
       role-to-assume: ${{ vars.DEVOPS_ROLE_ASSUME }}
-      aws-region: ${{ vars.DEVOPS_ROLE_SESSION_NAME }}
+      aws-region: ${{ vars.DEVOPS_ARTIFACT_REGION }}
       role-duration-seconds: 1200
 
   - name: Install AWS CLI
