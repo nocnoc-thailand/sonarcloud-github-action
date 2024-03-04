@@ -26,25 +26,27 @@ permissions:
   contents: read # This is required for actions/checkout
   
 steps:
-  - name: AWS Configure
-    uses: aws-actions/configure-aws-credentials@v1.7.0
-    with:
-      role-session-name: ${{ inputs.devops_role_session_name }}
-      role-to-assume: ${{ inputs.devops_role_assume }}
-      aws-region: ${{ inputs.devops_artifact_region }}
-      role-duration-seconds: 1200
+  - name: Print input
+    run: echo ${{ inputs.devops_role_session_name }}
+  # - name: AWS Configure
+  #   uses: aws-actions/configure-aws-credentials@v1.7.0
+  #   with:
+  #     role-session-name: ${{ inputs.devops_role_session_name }}
+  #     role-to-assume: ${{ inputs.devops_role_assume }}
+  #     aws-region: ${{ inputs.devops_artifact_region }}
+  #     role-duration-seconds: 1200
 
-  - name: Install AWS CLI
-    uses: nocnoc-thailand/install-aws-cli-action@v1.0.1
-    with:
-      arch: amd64
+  # - name: Install AWS CLI
+  #   uses: nocnoc-thailand/install-aws-cli-action@v1.0.1
+  #   with:
+  #     arch: amd64
 
-  - name: Docker action
-    runs:
-      using: docker
-      image: Dockerfile
-      entrypoint: "/entrypoint.sh"
-      post-entrypoint: "/cleanup.sh"
+  # - name: Docker action
+  #   runs:
+  #     using: docker
+  #     image: Dockerfile
+  #     entrypoint: "/entrypoint.sh"
+  #     post-entrypoint: "/cleanup.sh"
 
 inputs:
   args:
